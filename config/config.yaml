@@ -1,0 +1,154 @@
+# Stake By Me - Configuration File
+
+# Browser Settings
+browser:
+  headless: true # Set to false for debugging with visible browser
+  timeout: 30000 # Default timeout in milliseconds
+  slow_mo: 0 # Slow down operations by N milliseconds (useful for debugging)
+  viewport:
+    width: 1920
+    height: 1080
+
+# Directory Paths
+paths:
+  input_folder: ./data # JSON files directory
+  upload_folder: ./input # Document images directory
+  output_folder: ./output # Generated Excel files
+  logs_folder: ./logs # Application logs
+  screenshots_folder: ./screenshots # Verification screenshots
+
+# Logging Configuration
+logging:
+  level: INFO # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  max_log_size_mb: 100 # Maximum size per log file
+  backup_count: 5 # Number of backup log files to keep
+
+# Job Processing
+jobs:
+  max_retries: 3 # Maximum retry attempts for failed jobs
+  retry_delay_seconds: 60 # Initial delay before first retry
+  exponential_backoff: true # Use exponential backoff for retries
+  job_timeout_minutes: 30 # Maximum time for a single job
+  otp_timeout_minutes: 5 # Time to wait for OTP input
+
+# Rate Limiting
+rate_limit:
+  enabled: true
+  max_jobs_per_hour: 20 # Maximum jobs to process per hour
+  delay_between_jobs_seconds: 30 # Minimum delay between job starts
+
+# Database Configuration
+database:
+  host: postgres # Use 'localhost' for local dev, 'postgres' for Docker
+  port: 5432
+  name: stake_db
+  # Note: Credentials should be in .env file, not here
+  pool_size: 10
+  max_overflow: 20
+
+# Redis Configuration
+redis:
+  host: redis # Use 'localhost' for local dev, 'redis' for Docker
+  port: 6379
+  db: 0
+  queue_name: stake_jobs
+
+# Worker Configuration
+worker:
+  processes: 1 # Number of worker processes (1 recommended for single operator)
+  heartbeat_interval_seconds: 30 # Worker heartbeat frequency
+  restart_interval_hours: 24 # Automatically restart worker after N hours
+
+# System Health Monitoring
+monitoring:
+  health_check_interval_seconds: 30
+  cpu_threshold_percent: 80
+  ram_threshold_percent: 80
+  disk_threshold_percent: 90
+
+# Cleanup Tasks
+cleanup:
+  archive_logs_after_days: 7 # Archive logs older than N days
+  delete_old_jobs_after_days: 30 # Delete completed jobs older than N days
+  cleanup_cron: "0 2 * * *" # Run cleanup daily at 2 AM
+
+# API Configuration
+api:
+  host: 0.0.0.0
+  port: 8000
+  debug: false
+  cors_origins:
+    - http://localhost
+    - http://localhost:8000
+
+# Security
+security:
+  enable_auth: true # Enable basic authentication
+  session_timeout_minutes: 60
+  # Note: API keys and passwords should be in .env file
+
+# Automation Workflow
+workflow:
+  target_url: "https://stake.ac"
+  verification_url: "https://stake.ac/settings/verification"
+
+  # Timeouts for specific steps (milliseconds)
+  timeouts:
+    page_load: 30000
+    element_wait: 10000
+    network_idle: 5000
+    scroll_wait: 1000
+    form_submit: 15000
+    otp_submit: 10000
+    upload_wait: 20000
+
+  # Document upload settings
+  document_upload:
+    license_type: "Driving License"
+    front_image_suffix: "_front.png"
+    back_image_suffix: "_back.png"
+
+  # Screenshot settings
+  screenshots:
+    full_page: true
+    quality: 90
+
+# Data Generation (for missing fields)
+data_generation:
+  # Age requirements
+  min_age: 18
+  max_age: 80
+
+  # Default country if not provided
+  default_country: "India"
+
+  # Occupation options
+  occupations:
+    industries:
+      - Technology
+      - Finance
+      - Healthcare
+      - Education
+      - Retail
+      - Manufacturing
+    fields:
+      - Engineering
+      - Management
+      - Sales
+      - Marketing
+      - Operations
+      - Research
+    experience_levels:
+      - "0-2 years"
+      - "3-5 years"
+      - "6-10 years"
+      - "10+ years"
+
+# Feature Flags
+features:
+  enable_captcha_detection: true
+  enable_network_logging: true
+  enable_console_logging: true
+  enable_screenshots_on_error: true
+  enable_html_dumps: true
