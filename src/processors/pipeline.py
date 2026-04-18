@@ -16,9 +16,12 @@ class DataPipeline:
     
     def __init__(
         self,
-        input_folder: str = "./data",
-        output_folder: str = "./output"
+        input_folder: str = None,
+        output_folder: str = None
     ):
+        from src.config import config
+        if output_folder is None:
+            output_folder = config.paths.output_folder
         self.json_processor = JSONProcessor(input_folder)
         self.data_generator = DataGenerator()
         self.excel_generator = ExcelGenerator(output_folder)

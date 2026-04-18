@@ -11,7 +11,7 @@ browser:
 
 # Directory Paths
 paths:
-  input_folder: ./data # JSON files directory
+  input_folder: ./input # JSON files directory
   upload_folder: ./input # Document images directory
   output_folder: ./output # Generated Excel files
   logs_folder: ./logs # Application logs

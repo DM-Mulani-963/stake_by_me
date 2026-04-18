@@ -58,24 +58,22 @@ stake_by_me/
 1. **Clone the repository**
 
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/DM-Mulani-963/stake_by_me
    cd stake_by_me
    ```
-
 2. **Set up environment variables**
 
    ```bash
    cp .env.example .env
    # Edit .env with your configuration
    ```
-
 3. **Start with Docker Compose**
 
    ```bash
    docker-compose up -d
    ```
-
 4. **Access the dashboard**
+
    ```
    http://localhost:8000
    ```
@@ -252,4 +250,5 @@ Internal use only - Not for redistribution
 ---
 
 **Built with ❤️ for reliability and stability**
+
 # stake_by_me

@@ -18,7 +18,7 @@ class BrowserConfig(BaseModel):
 
 class PathsConfig(BaseModel):
     """File paths configuration"""
-    input_folder: str = "./data"
+    input_folder: str = "./input"
     upload_folder: str = "./input"
     output_folder: str = "./output"
     logs_folder: str = "./logs"
@@ -175,6 +175,7 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         case_sensitive = False
+        extra = 'ignore'  # Ignore extra environment variables
 
 
 def load_config(config_path: str = "config/config.yaml") -> Config:

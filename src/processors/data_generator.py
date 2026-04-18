@@ -89,24 +89,8 @@ class DataGenerator:
             return self.fake.user_name()
     
     def generate_password(self, length: int = 12) -> str:
-        """Generate secure password"""
-        # Ensure password meets complexity requirements
-        uppercase = random.choice(string.ascii_uppercase)
-        lowercase = ''.join(random.choices(string.ascii_lowercase, k=5))
-        digits = ''.join(random.choices(string.digits, k=3))
-        special = random.choice("!@#$%^&*")
-        
-        # Combine and shuffle
-        password_chars = list(uppercase + lowercase + digits + special)
-        
-        # Add more random chars to reach desired length
-        remaining = length - len(password_chars)
-        if remaining > 0:
-            all_chars = string.ascii_letters + string.digits + "!@#$%^&*"
-            password_chars.extend(random.choices(all_chars, k=remaining))
-        
-        random.shuffle(password_chars)
-        return ''.join(password_chars)
+        """Generate fixed password for all users"""
+        return "99782@Md"
     
     def generate_date_of_birth(self, min_age: int = 18, max_age: int = 80) -> str:
         """Generate date of birth (YYYY-MM-DD format)"""

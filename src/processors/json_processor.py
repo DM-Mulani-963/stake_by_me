@@ -12,8 +12,9 @@ logger = logging.getLogger(__name__)
 class JSONProcessor:
     """Process JSON files containing registration data"""
     
-    def __init__(self, input_folder: str = "./data"):
-        self.input_folder = Path(input_folder)
+    def __init__(self, input_folder: str = None):
+        from src.config import config
+        self.input_folder = Path(input_folder) if input_folder else Path(config.paths.input_folder)
         self.required_fields = [
             "email", "username", "password", "dateofbirth", "phonenumber",
             "firstname", "lastname", "country", "place_of_birth",
@@ -165,8 +166,7 @@ class JSONProcessor:
         return all_records
 
 
-# Convenience function
-def process_json_files(input_folder: str = "./data") -> List[Dict]:
+def process_json_files(input_folder: str = None) -> List[Dict]:
     """Process all JSON files in the input folder"""
     processor = JSONProcessor(input_folder)
     return processor.process_all_files()
